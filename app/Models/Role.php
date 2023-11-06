@@ -8,7 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
-}
 
-CONST RolesCreateAt = "created_at";
-CONST RolesUpdateAt = "updated_at";
+    protected $primaryKey = 'RoleId';
+
+    protected $table = 'masterroles';
+
+    protected $fillable = [
+    'RoleName',
+    'RoleCode',
+    ];
+
+    const CREATED_AT = 'RoleCreatedAt';
+    const UPDATED_AT = 'RoleUpdatedAt';
+}

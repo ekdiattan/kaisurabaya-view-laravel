@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
@@ -12,8 +13,13 @@ class RoleController extends Controller
 
     try{
         DB::beginTransaction();
-        
-        $store = $request->all(); 
+
+        $request->validate([
+            'RoleName' => 'required',
+            'RoleCode' => 'required'
+        ]);
+
+        $store=Role::create($request->all());
     }catch(\Exception $e){
 
         DB::rollBack();
