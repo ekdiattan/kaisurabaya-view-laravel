@@ -20,4 +20,5 @@ class Role extends Model
 
     const CREATED_AT = 'RoleCreatedAt';
     const UPDATED_AT = 'RoleUpdatedAt';
+    const DELETED_AT = 'RoleDeletedAt';
 }
