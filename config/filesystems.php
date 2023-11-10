@@ -15,19 +15,6 @@ return [
 
     'default' => env('FILESYSTEM_DISK', 'local'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Filesystem Disks
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure as many filesystem "disks" as you wish, and you
-    | may even configure multiple disks of the same driver. Defaults have
-    | been set up for each driver as an example of the required values.
-    |
-    | Supported Drivers: "local", "ftp", "sftp", "s3"
-    |
-    */
-
     'disks' => [
 
         'local' => [
@@ -54,6 +41,13 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
+        ],
+
+        'github' => [
+            'driver' => 'github',
+            'access_token' => env('GITHUB_TOKEN'),
+            'repository' => env('GITHUB_REPOSITORY'),
+            'branch' => env('GITHUB_BRANCH'),
         ],
 
     ],
