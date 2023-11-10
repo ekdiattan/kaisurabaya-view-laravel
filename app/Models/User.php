@@ -17,15 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $table ='userprofile';
-    protected $primaryKey = 'UserProfileId';
+    protected $table ='useraccount';
+    protected $primaryKey = 'UserAccountId';
     
     protected $fillable = [
-        'UserName',
-        'UserAddres',
-        'UserGender',
-        'UserRoleId',
-        'UserPhone'
+        
+        'UserEmail',
+        'UserPassword',
     ];
 
     public function role()
@@ -33,6 +31,6 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'UserRoleId', 'RoleId');
     }
     
-    const CREATED_AT = 'UserProfileCreatedAt';
-    const UPDATED_AT = 'UserProfileUpdatedAt';
+    const CREATED_AT = 'UserAccountCreatedAt';
+    const UPDATED_AT = 'UserAccountUpdatedAt';
 }
