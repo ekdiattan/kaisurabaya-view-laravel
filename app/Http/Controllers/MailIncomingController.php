@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Services\MailIncomingService;
+use App\Http\Requests\MailIncomingRequest;
+use App\Http\Requests\UpdateMailIncomingRequest;
 
 class MailIncomingController extends Controller
 
@@ -17,33 +19,56 @@ class MailIncomingController extends Controller
 
     public function index()
     {
-        return $this->mailIncomingService->index();
+        try{
+            $mailIncoming = $this->mailIncomingService->index();
+        }
+        catch(\Exception $e){
+            return $this->sendError($e->getMessage());
+        }
+        return $this->successResponse($mailIncoming);
     }
 
-    public function store(Request $request)
+    public function store(MailIncomingRequest $request)
     {
         try{
-            return $this->mailIncomingService->store($request->all());
+             $mailIncoming = $this->mailIncomingService->store($request->all());
         }
-        catch(\Exception $e)
-        {
-            return response()->json([
-                'message' => $e->getMessage()
-            ], 500);
+        catch(\Exception $e){
+            return $this->sendError($e->getMessage());
         }
+        return $this->successResponse($mailIncoming);
     }
 
     public function show($id)
     {
-        return $this->mailIncomingService->show();
+        try{
+            $mailIncoming = $this->mailIncomingService->show($id);
+        }
+        catch(\Exception $e){
+            return $this->sendError($e->getMessage());
+        }
+        return $this->successResponse($mailIncoming);
     }
 
-    public function update(Request $request, $id)
+    public function update($id, UpdateMailIncomingRequest $request)
     {
-        return $this->mailIncomingService->update();
+        try{
+            $mailIncoming = $this->mailIncomingService->update($id, $request->all());
+        }
+        catch(\Exception $e){
+            return $this->sendError($e->getMessage());
+        }
+        return $this->successResponse($mailIncoming);
     }
-    public function destroy($id)
+
+    public function destroy(int $id)
     {
-        return $this->mailIncomingService->destroy();
+        try{
+            $mailIncoming = $this->mailIncomingService->destroy($id);
+        }
+        catch(\Exception $e){
+            return $this->sendError($e->getMessage());
+        }
+        return $this->successResponse($mailIncoming);    
     }
 }

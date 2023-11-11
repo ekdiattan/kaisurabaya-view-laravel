@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Services\RoleService;
@@ -16,72 +17,67 @@ class RoleController extends Controller
         $this->roleService = $roleService;
     }
 
-    public function store(Request $request){
+    public function store(RoleRequest $request){
 
     try{
-        DB::beginTransaction();
 
-        $store = $this->roleService->store($request->all());
+        $role = $this->roleService->store($request->all());
 
     }catch(\Exception $e){
 
-        DB::rollBack();
         throw new \Exception($e->getMessage());
     }
-        DB::commit();
-        return response($store);
+        return $this->successResponse($role);
     }
 
-    // public function index()
-    // {
-    //     $role = Role::all();
-    //     return response($role);
-    // }
+    public function index()
+    {
+        try{
+            $role = $this->roleService->index();
+        }catch (\Exception $e){
 
-    // public function show($id)
-    // {
-    //     try{
-    //         DB::beginTransaction();
-    //         $role = Role::find($id);
-    //     }catch (\Exception $e){
-    //         DB::rollBack();
-    //         throw new \Exception($e->getMessage());
-    //     }
-    //     DB::commit();
+            return $this->sendError($e->getMessage());
+        }
+        return $this->successResponse($role);
+    }
 
-    //     return response($role);
-    // }
+    public function show($id)
+    {
+        try{
 
-    // public function update(Request $request, $id)
-    // {
-    //     try{
-    //         DB::beginTransaction();
-    //         $role = Role::find($id);
-    //         $role->update($request->all());
+            $role = $this->roleService->show($id);
 
-    //     }catch (\Exception $e){
-    //         DB::rollBack();
-    //         throw new \Exception($e->getMessage());
-    //     }
+        }catch (\Exception $e){
 
-    //     DB::commit();
-    //     return response($role);
-    // }
+            return $this->sendError($e->getMessage());
+        }
+        return $this->successResponse($role);
+    }
 
-    // public function destroy(int $id)
-    // {
-    //     try{
-    //         DB::beginTransaction();
+    public function update(Request $request, $id)
+    {
+        try{
+            $role= $this->roleService->update($request->all(), $id);
 
-    //         $role = Role::find($id);
-    //         $role->delete();
+        }catch (\Exception $e){
+        DB::rollBack();
+            return $this->sendError($e->getMessage());
+        }
 
-    //     }catch (\Exception $e){
-    //         DB::rollBack();
-    //         throw new \Exception($e->getMessage());
-    //     }
-    //         DB::commit();
-    //         return response($role);
-    // }
+        DB::commit();
+        return $this->successResponse($role);
+    }
+
+    public function destroy(int $id)
+    {
+        try{
+
+            $role = $this->roleService->destroy($id);
+
+        }catch (\Exception $e){
+            return $this->sendError($e->getMessage());
+        }
+        return $this->successResponse($role);
+    }
 }
 

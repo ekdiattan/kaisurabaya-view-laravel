@@ -12,7 +12,7 @@ class MailIncoming extends Model
 
     protected $table = 'mailincoming';
 
-    protected $primarykey = 'MailIncomingId';
+    protected $primaryKey = 'MailIncomingId';
 
     protected $fillable = [
         

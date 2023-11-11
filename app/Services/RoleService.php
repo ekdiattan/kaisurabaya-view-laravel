@@ -20,12 +20,25 @@ class RoleService
 
     public function index()
     {
-        return 'index';
+        try{
+            $role = Role::all();
+        }catch(\Exception $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
+        return response($role);
+
     }
 
-    public function show()
+    public function show($id)
     {
-        return 'show';
+        try{
+            $role = Role::find($id);
+        }catch(\Exception $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
+        return response($role);
     }
 
     public function store(array $data)
@@ -34,30 +47,47 @@ class RoleService
         try{
             DB::beginTransaction();
 
-            // $this->request->validate();
 
             $role = Role::create($data);
 
         }catch(\Exception $e)
         {
             DB::rollBack();
-
-            return response()->json([
-                'message' => $e->getMessage()
-            ], 500);
+            throw new \Exception($e->getMessage());
         }
-
              DB::commit();
-             return response($role);
+        return $role;
     }
 
-    public function update()
+    public function update( array $data, $id)
     {
-        return 'update';
+        try{
+            DB::beginTransaction();
+
+            $role = Role::find($id);
+            $role->update($data);
+
+        }catch(\Exception $e)
+        {
+            DB::rollBack();
+            throw new \Exception($e->getMessage());
+        }
+        DB::commit();
+        return $role;
     }
 
-    public function destroy()
+    public function destroy(int $id)
     {
-        return 'destroy';
+        try{
+            DB::beginTransaction();
+
+            $role = Role::find($id);
+            $role->delete();
+    }catch(\Exception $e)
+    {
+        DB::rollBack();
+        throw new \Exception($e->getMessage());
+    }
+        return $role;
     }
 }

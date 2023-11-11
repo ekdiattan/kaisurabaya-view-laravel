@@ -11,7 +11,7 @@ Route::apiResource('roles', RoleController::class);
 
 Route::apiResource('users', UserController::class);
 
-Route::apiResource('mails', MailIncomingController::class);
+Route::apiResource('mail-incomings', MailIncomingController::class);
 
 Route::post('login', [AuthController::class, 'login']);
 

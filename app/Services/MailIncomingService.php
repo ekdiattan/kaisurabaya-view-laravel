@@ -3,19 +3,40 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Psr7\Request;
+use App\Models\MailIncoming;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class MailIncomingService
 {
+
     public function index()
     {
-        return 'index';
+        try{
+            DB::beginTransaction();
+            
+            $mailIncoming = MailIncoming::all();
+        }catch(\Exception $e){
+            DB::rollBack();
+                throw new \Exception($e->getMessage());
+        }
+            DB::commit();
+            return $mailIncoming;
     }
 
-    public function show()
+    public function show($id)
     {
-        return 'show';
+        try{
+            DB::beginTransaction();
+            
+            $mailIncoming = MailIncoming::find($id);
+
+        }catch(\Exception $e){
+            DB::rollBack();
+            throw new \Exception($e->getMessage());
+        }
+             DB::commit();
+             return $mailIncoming;
     }
 
     public function store(array $data)
@@ -23,24 +44,53 @@ class MailIncomingService
     {
         try{
             DB::beginTransaction();
-            dd($data);
+
+            $dataId = [];
+
+            foreach($data as $datas)
+            {
+                $createdData = MailIncoming::create($datas);
+                $dataId[] = $createdData;
+            }               
         }catch(\Exception $e)
         {
             DB::rollBack();
-            return response()->json([
-                'message' => $e->getMessage()
-            ], 500);
+            throw new \Exception($e->getMessage());
+        }
+            DB::commit();
+            return $dataId;
+    }
+
+    public function update($id, array $data)
+    {
+        try{
+            DB::beginTransaction();
+
+                $mailIncoming = MailIncoming::find($id);
+                $mailIncoming->update($data);
+
+        }catch(\Exception $e){
+            DB::rollBack();
+            throw new \Exception($e->getMessage());
+
         }
              DB::commit();
+             return $mailIncoming;
     }
 
-    public function update()
+    public function destroy(int $id)
     {
-        return 'update';
-    }
+        try{
+            DB::beginTransaction();
+            
+            $mailIncoming = MailIncoming::find($id);
+            $mailIncoming->delete();
 
-    public function destroy()
-    {
-        return 'destroy';
+    }catch(\Exception $e){
+            DB::rollBack();
+            throw new \Exception($e->getMessage());
+    }
+             DB::commit();
+             return $mailIncoming;
     }
 }
