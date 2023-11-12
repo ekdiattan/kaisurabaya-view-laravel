@@ -4,22 +4,20 @@ namespace App\Models;
 
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
-class UserAccount extends Model
+class UserAccount extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, Notifiable;
 
     protected $table = 'useraccount';
-
     protected $primaryKey = 'UserAccountId';
     
     protected $fillable = [
+    
         'UserEmail',
         'UserPassword',
+        'UserNameId',
     ];
 
     const CREATED_AT = 'UserAccountCreatedAt';

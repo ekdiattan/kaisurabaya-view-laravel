@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\UserAccount;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 
-class UserController extends Controller
+class UserProfileController extends Controller
 {   
         public function index()
         {
-            $role = User::all();
+            $role = UserProfile::all();
             return response($role);
         }
         
@@ -21,7 +19,21 @@ class UserController extends Controller
         {
             try{
                 DB::beginTransaction();
-                $role = User::with(['role'])->find($id);
+                $role = UserProfile::with(['role'])->find($id);
+            }catch (\Exception $e){
+                DB::rollBack();
+                throw new \Exception($e->getMessage());
+            }
+            DB::commit();
+    
+            return response($role);
+        }
+        
+        public function store(Request $request)
+        {
+            try{
+                DB::beginTransaction();
+                $role = UserProfile::create($request->all());
             }catch (\Exception $e){
                 DB::rollBack();
                 throw new \Exception($e->getMessage());
@@ -35,7 +47,7 @@ class UserController extends Controller
         {
             try{
                 DB::beginTransaction();
-                $role = User::find($id);
+                $role = UserProfile::find($id);
                 $role->update($request->all());
     
             }catch (\Exception $e){
@@ -52,7 +64,7 @@ class UserController extends Controller
             try{
                 DB::beginTransaction();
     
-                $role = User::find($id);
+                $role = UserProfile::find($id);
                 $role->delete();
     
             }catch (\Exception $e){

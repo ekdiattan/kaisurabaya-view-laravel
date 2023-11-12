@@ -1,5 +1,7 @@
 <?php
 
+use App\UserAccount;
+
 return [
 
     /*
@@ -40,10 +42,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+     
         'api' => [
-                'driver' => 'passport',
-                'provider' => 'users',
-            ],
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -64,10 +67,9 @@ return [
     */
 
     'providers' => [
-
         'users' => [
-            'driver' => 'database',
-            'table' => 'useraccount',
+            'driver' => 'eloquent',
+            'model' => App\Models\UserAccount::class,
         ],
     ],
 
