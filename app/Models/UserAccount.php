@@ -15,9 +15,12 @@ class UserAccount extends Authenticatable
     
     protected $fillable = [
     
-        'UserEmail',
-        'UserPassword',
+        'email',
+        'password',
         'UserNameId',
+        'UserAccountCreatedBy',
+        'UserAccountUpdatedBy',
+        'UserAccountDeletedBy',
     ];
 
     const CREATED_AT = 'UserAccountCreatedAt';

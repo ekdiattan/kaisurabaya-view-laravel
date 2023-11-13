@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserAccountControler;
 use App\Http\Controllers\MailIncomingController;
+use App\Http\Controllers\InternshipLetterController;
 
 
 
@@ -29,6 +30,10 @@ Route::middleware('auth:api')->group(function () {
     // Auth API
     Route::post('register', [AuthController::class, 'register']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('me', [AuthController::class, 'me']);
+
+    // InternshipLetters
+    Route::apiResource('internship-letters', InternshipLetterController::class);
     
 });
 

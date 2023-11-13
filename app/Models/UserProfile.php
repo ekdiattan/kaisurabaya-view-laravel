@@ -28,6 +28,9 @@ class UserProfile extends Authenticatable
         'UserGender',
         'UserRoleId',
         'UserPhone',
+        'UserProfileCreatedBy',
+        'UserProfileUpdatedBy',
+        'UserProfileDeletedBy',
     ];
 
     public function role()

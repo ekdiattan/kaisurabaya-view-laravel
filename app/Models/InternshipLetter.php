@@ -14,6 +14,10 @@ class InternshipLetter extends Model
 
     protected $primaryKey = 'InternshipLetterId';
 
+    protected $casts =[
+        'StudentName' => 'array',
+    ];
+    
     protected $guarded = [
         
         'InternshipLetterCreatedAt',
