@@ -25,6 +25,7 @@ Route::middleware('auth:api')->group(function () {
     // Mail Incoming API
     Route::apiResource('mail-incomings', MailIncomingController::class);
 
+    // User Account API
     Route::apiResource('user-accounts', UserAccountControler::class);
 
     // Auth API
@@ -34,6 +35,7 @@ Route::middleware('auth:api')->group(function () {
 
     // InternshipLetters
     Route::apiResource('internship-letters', InternshipLetterController::class);
+    Route::post('generateCod', [MailIncomingController::class, 'generateCode']);
     
 });
 

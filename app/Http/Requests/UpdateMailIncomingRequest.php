@@ -26,4 +26,11 @@ class UpdateMailIncomingRequest extends FormRequest
 
         ];
     }
+    public function prepareForValidation(){
+        if(auth()->check()){
+            $this->merge([
+                'MailIncomingUpdatedById' => auth()->user()->id,
+            ]);
+        }
+    }
 }

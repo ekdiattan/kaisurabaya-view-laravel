@@ -19,8 +19,9 @@ class MailIncoming extends Model
         'MailIncomingNumber',
         'MailIncomingRegarding',
         'MailIncomingType',
-        'MailIncomingCreatedById',
-        'MailIncomingUpdatedById',
+        'MailIncomingCreatedBy',
+        'MailIncomingUpdatedBy',
+        'MailIncomingDeletedBy',
     ];
 
     const CREATED_AT = 'MailIncomingCreatedAt';

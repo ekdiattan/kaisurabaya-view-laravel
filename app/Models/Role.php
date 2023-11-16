@@ -17,7 +17,6 @@ class Role extends Model
     protected $fillable = [
     'RoleName',
     'RoleCode',
-    
     ];
 
     const CREATED_AT = 'RoleCreatedAt';

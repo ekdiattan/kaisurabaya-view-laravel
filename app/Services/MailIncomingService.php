@@ -3,9 +3,11 @@
 
 namespace App\Services;
 
-use App\Models\MailIncoming;
 use Illuminate\Support\Arr;
+use App\Models\MailIncoming;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class MailIncomingService
 {
@@ -39,6 +41,17 @@ class MailIncomingService
              return $mailIncoming;
     }
 
+    public function generateCode()
+    {
+       $Id = MailIncoming::max('MailIncomingId')+1;
+
+        $year = date('Y');
+        $total = "KE.".$Id."/"."VII"."/"."KA-".$year;
+
+        return $total;
+
+    }
+
     public function store(array $data)
     
     {
@@ -46,10 +59,17 @@ class MailIncomingService
             DB::beginTransaction();
 
             $dataId = [];
-
+            $generatecode = $this->generateCode();
+            dd($generatecode);
             foreach($data as $datas)
             {
-                $createdData = MailIncoming::create($datas);
+                $createdData = MailIncoming::create([
+                    'MailIncomingNumber' => $generatecode,
+                    'MailIncomingRegarding' => $datas['MailIncomingRegarding'],
+                    'MailIncomingType' => $datas['MailIncomingType'],
+                    'MailIncomingCreatedBy' => Auth::id(),
+                    'MailIncomingUpdatedBy' => Auth::id(),
+                ]);
                 $dataId[] = $createdData;
             }               
         }catch(\Exception $e)
@@ -84,6 +104,12 @@ class MailIncomingService
             DB::beginTransaction();
             
             $mailIncoming = MailIncoming::find($id);
+
+            $updateData = [
+                'MailIncomingDeletedBy' => Auth::id(),
+            ];
+            $mailIncoming->update($updateData);
+
             $mailIncoming->delete();
 
     }catch(\Exception $e){
