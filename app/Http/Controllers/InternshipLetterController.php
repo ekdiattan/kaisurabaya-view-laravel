@@ -32,7 +32,7 @@ class InternshipLetterController extends Controller
         }catch (\Exception $e){
             throw new \Exception($e->getMessage());
         }
-        return response($internshipLetter);
+        return $this->successResponse($internshipLetter);
     }
 
     public function store(InternshipLetterRequest $request)

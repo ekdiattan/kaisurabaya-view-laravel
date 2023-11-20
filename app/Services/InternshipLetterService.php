@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Models\InternshipLetter;
+use App\Models\MailOutput;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,7 @@ class InternshipLetterService
         try{
             DB::beginTransaction();
             
-            $internshipLetter = InternshipLetter::find($id);
+            $internshipLetter = InternshipLetter::with(['userprofile'])->find($id);
 
         }catch(\Exception $e){
             DB::rollBack();
@@ -38,31 +39,27 @@ class InternshipLetterService
              DB::commit();
              return $internshipLetter;
     }
-
-    public function store(array $data)
     
+    public function store(array $data)
     {
         try{
             DB::beginTransaction();
 
-            $dataId = [];
-            
-            foreach($data as $datas)
-            {
-                $createdData = InternshipLetter::create(array_merge(
-                    $datas, [
-                    'InternshipLetterCreatedBy' => Auth::id(),
-                    'InternshipLetterUpdatedBy' => Auth::id(),
-                ]));
-                $dataId[] = $createdData;
-            }               
+            $dataWithManagerId = array_merge($data, ['ManagerId' => 15]);
+            $internshipLetter = InternshipLetter::create($dataWithManagerId);
+
+            $mailOutput = MailOutput::create([
+                'MailOutputIPId' => $internshipLetter->IntershipLetterId,
+                'MailOutputCode' => $internshipLetter,
+            ]);
+
         }catch(\Exception $e)
         {
             DB::rollBack();
             throw new \Exception($e->getMessage());
         }
             DB::commit();
-            return $dataId;
+            return $internshipLetter;
     }
 
     public function update($id, array $data)

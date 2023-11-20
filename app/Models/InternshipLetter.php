@@ -14,10 +14,6 @@ class InternshipLetter extends Model
 
     protected $primaryKey = 'InternshipLetterId';
 
-    protected $casts =[
-        'StudentName' => 'array',
-    ];
-    
     protected $guarded = [
         
         'InternshipLetterCreatedAt',
@@ -25,6 +21,11 @@ class InternshipLetter extends Model
         'InternshipLetterDeletedAt',        
     ];
 
+    public function userprofile()
+    {
+        return $this->belongsTo(UserProfile::class, 'ManagerId', 'UserProfileId');
+    }
+    
     const CREATED_AT = 'InternshipLetterCreatedAt';
     const UPDATED_AT = 'InternshipLetterUpdatedAt';
     const DELETED_AT = 'InternshipLetterDeletedAt';

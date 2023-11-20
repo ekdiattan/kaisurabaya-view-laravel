@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InternshipLetterRequest extends FormRequest
@@ -22,12 +23,22 @@ class InternshipLetterRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            '.*ManagerId' => 'required',
-            '.*StudentName' => 'required',
-            '.*OriginAgency' => 'required',
-            '.*StartIntern' => 'required',
-            '.*EndIntern' => 'required',
+            'StudentName' => 'required',
+            'OriginAgency' => 'required',
+            'StartIntern' => 'required',
+            'EndIntern' => 'required',
+            'DocumentNumber' => 'unique:InternshipLetter,DocumentNumber',
         ];
     }
+
+    public function prepareForValidation()
+    {
+        if (auth()->check()) {
+            $this->merge([
+                'InternshipLetterCreatedBy' => Auth::id(),
+                'InternshipLetterUpdatedBy' => Auth::id(),
+            ]);
+        }
+    }
+
 }

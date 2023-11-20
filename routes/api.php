@@ -8,8 +8,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserAccountControler;
 use App\Http\Controllers\MailIncomingController;
 use App\Http\Controllers\InternshipLetterController;
-
-
+use App\Http\Controllers\MailOutputController;
 
 Route::post('login', [AuthController::class, 'login']);
 
@@ -36,6 +35,9 @@ Route::middleware('auth:api')->group(function () {
     // InternshipLetters
     Route::apiResource('internship-letters', InternshipLetterController::class);
     Route::post('generateCod', [MailIncomingController::class, 'generateCode']);
+
+    // MailOuputs
+    Route::apiResource('mail-outputs', MailOutputController::class);
     
 });
 
