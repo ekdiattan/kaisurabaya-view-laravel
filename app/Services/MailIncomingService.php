@@ -43,11 +43,11 @@ class MailIncomingService
 
     public function generateCode()
     {
-       $Id = MailIncoming::max('MailIncomingId')+1;
-
+        $Id = MailIncoming::max('MailIncomingId')+1;
+    
         $year = date('Y');
         $total = "KE.".$Id."/"."VII"."/"."KA-".$year;
-
+        
         return $total;
 
     }

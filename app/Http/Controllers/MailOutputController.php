@@ -38,7 +38,7 @@ class MailOutputController extends Controller
         }
         return $this->successResponse($mailOutput);
     }
-
+    
     public function destroy(int $id){
         try{
             $mailOutput = MailOutput::find($id);

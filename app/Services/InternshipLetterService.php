@@ -3,8 +3,10 @@
 
 namespace App\Services;
 
+use App\Helpers\GeneratorHelper;
 use App\Models\InternshipLetter;
 use App\Models\MailOutput;
+use Generator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +41,7 @@ class InternshipLetterService
              DB::commit();
              return $internshipLetter;
     }
-    
+
     public function store(array $data)
     {
         try{
@@ -48,9 +50,11 @@ class InternshipLetterService
             $dataWithManagerId = array_merge($data, ['ManagerId' => 15]);
             $internshipLetter = InternshipLetter::create($dataWithManagerId);
 
+            $generateCode = GeneratorHelper::create($internshipLetter);
+            
             $mailOutput = MailOutput::create([
                 'MailOutputIPId' => $internshipLetter->IntershipLetterId,
-                'MailOutputCode' => $internshipLetter,
+                'MailOutputCode' => $generateCode,
             ]);
 
         }catch(\Exception $e)
