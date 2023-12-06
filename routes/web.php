@@ -8,3 +8,4 @@ use App\Http\Controllers\ViewController;
 Route::get('/', [ LoginController::class, 'login']);
 
 Route::get('/main', [ViewController::class, 'main']);
+Route::get('/', [ViewController::class, 'login']);

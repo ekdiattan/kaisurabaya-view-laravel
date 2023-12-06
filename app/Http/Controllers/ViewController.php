@@ -10,7 +10,15 @@ class ViewController extends Controller
     {
         return view('partials.main',
         [ 
-            'tittle' => 'main',
+            'tittle' => 'Dashboard',
+        ]);
+    }
+
+    public function login()
+    {
+        return view('login', [
+
+            'tittle' => 'Login',
         ]);
     }
 }
