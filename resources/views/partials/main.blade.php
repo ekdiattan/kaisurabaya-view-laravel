@@ -55,7 +55,6 @@
         </li>
       </ul>
     </nav>
-    
     {{-- COVER --}}
     <div class="container-fluid page-body-wrapper">
       <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
@@ -66,10 +65,10 @@
           <div class="navbar-brand-wrapper">
             <a class="navbar-brand brand-logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg-xUT9Qdlq9Wo8vAi_K0GnJ_CawBU3Lqg6g&usqp=CAU" alt="logo" id="logokai"/></a>
           </div>
-          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1" id="tulisan">Selamat Datang , Attan</h4>
+          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1" id="tulisan">{{$greetings}} , {{$user}}</h4>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">
-              <h4 class="mb-0 font-weight-bold d-none d-xl-block">20 November 2023</h4>
+              <h4 class="mb-0 font-weight-bold d-none d-xl-block">{{$date}}</h4>
             </li>
           </ul>
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -89,14 +88,14 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                 <img src="https://img.a.transfermarkt.technology/portrait/big/8198-1694609670.jpg?lm=1" alt="profile"/>
-                <span class="nav-profile-name">Attan</span>
+                <span class="nav-profile-name">{{$user}}</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item">
+                <a class="dropdown-item" href="/setting">
                   <i class="fa-solid fa-gear"></i>
-                  Settings
+                  Settingss
                 </a>
-                <a class="dropdown-item" href="/">
+                <a class="dropdown-item" href="/logout">
                     <i class="fa-solid fa-right-from-bracket"></i>
                   Logout
                 </a>

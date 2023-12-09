@@ -23,6 +23,11 @@ class UserAccount extends Authenticatable
         'UserAccountDeletedBy',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(UserProfile::class, 'UserNameId', 'UserProfileId');
+    }
+
     const CREATED_AT = 'UserAccountCreatedAt';
     const UPDATED_AT = 'UserAccountUpdatedAt';
 
