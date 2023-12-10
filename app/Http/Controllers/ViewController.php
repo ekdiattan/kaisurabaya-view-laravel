@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disposisi;
 use App\Models\Role;
+use App\Models\SuratMasuk;
+use App\Models\UserAccount;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDO;
 
 class ViewController extends Controller
 {
     public function main()
     {
+        $user = Auth::user();
         $date = date('d-m-Y');
-        $user = Auth::user()->user->UserName;
         $time = date('H');
 
         if($time < 12)
@@ -46,7 +51,7 @@ class ViewController extends Controller
     {
         $adduser = $this->main();
 
-        return view('adduser', [
+        return view('createuser', [
 
             'tittle' => 'Tambah Pengguna',
             'user' => $adduser->user,
@@ -57,28 +62,177 @@ class ViewController extends Controller
 
     public function setting()
     {
-        $user = Auth::user();
+        $adduser = $this->main();
         $role = Role::get('RoleName');
 
         return view('settinguser', 
         [
-
-            'tittle' => 'Akun Saya',
-            'user' => $user,
-            'role' => $role,
+            'tittle' => 'Tambah Pengguna',
+            'user' => $adduser->user,
+            'date' =>$adduser->date,
+            'greetings' => $adduser->greetings,
+            'role' => $role
         ]);
     }
 
-    public function suratmasukmagang()
+    public function suratmasukeksternal()
+    {
+        $adduser = $this->main();
+        $suratmasukeksternal = SuratMasuk::all();
+        $role = Role::all();
+
+        return view('suratmasukeksternal', 
+        [
+            'tittle' => 'Surat Masuk Eksternal',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'suratmasukeksternal' => $suratmasukeksternal,
+            'role' => $role
+        ]);
+    }
+    public function suratmasukinternal()
     {
         $adduser = $this->main();
 
-        return view('suratmasukmagang', 
+        return view('suratmasukinternal', 
         [
-            'tittle' => 'Surat Masuk Magang',
+            'tittle' => 'Surat Masuk',
             'user' => $adduser->user,
             'date' => $adduser->date,
             'greetings' => $adduser->greetings
+        ]);
+    }
+
+    public function suratkeluar()
+    {
+        $adduser = $this->main();
+
+        return view('suratkeluar', 
+        [
+            'tittle' => 'Surat Keluar',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings
+        ]);
+    }
+
+    public function disposisi()
+    {
+        $adduser = $this->main();
+        $user = UserProfile::all();
+        
+        return view('disposisi', [
+
+            'tittle' => 'Surat Keluar',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'employee' => $user
+        ]);
+    }
+
+    public function addsuratkeluar(){
+
+        $adduser = $this->main();
+
+        return view('tambahsuratkeluar', [
+
+            'tittle' => 'Tambah Surat Keluar',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings
+        ]);
+    }
+
+    public function suratmasuk()
+    {
+        $adduser = $this->main();
+        $datamasuk = SuratMasuk::all();
+        $role = Role::all();
+        
+        return view('suratmasuk', 
+        [
+            'tittle' => 'List Surat Keluar',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'datamasuk' => $datamasuk,
+            'role' => $role
+        ]);
+    }
+
+    public function usershow()
+    {
+        $adduser = $this->main();
+        $users = UserAccount::all();
+        return view('user', 
+        [
+            'tittle' => 'List Pengguna',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'users' => $users
+        ]);
+    }
+
+    public function showemployee()
+    {
+
+        $adduser = $this->main();
+        $employee = UserProfile::all();
+        
+        return view('employes', 
+        [
+            'tittle' => 'Data Pegawai',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'employee' => $employee
+        ]);
+    }
+
+    public function createstorevuseriew()
+    {
+        $adduser = $this->main();
+        return view('createuser', 
+        [
+            'tittle' => 'List Surat Keluar',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings
+        ]);
+    }
+
+    public function role()
+    {
+        $role = Role::all();
+
+        $adduser = $this->main();
+        return view('role',[
+
+            'tittle' => 'List Jabatan',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'role' => $role
+        ]);
+    }
+
+    public function listdisposisi()
+    {
+        $adduser = $this->main();
+        $disposisi = Disposisi::all();
+        $user = UserProfile::all();
+
+        return view('listdisposisi',
+        [
+            'tittle' => 'List Jabatan',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'disposisi' => $disposisi,
+            'employee' => $user
         ]);
     }
 }

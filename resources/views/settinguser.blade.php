@@ -1,5 +1,5 @@
-@extends('partials.connection')
-@section('content')
+@extends('partials.main')
+@section('main')
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -7,7 +7,7 @@
         <form class="forms-sample">
           <div class="form-group">
             <label for="exampleInputName1">Name</label>
-            <input type="text" class="form-control" id="exampleInputName1" placeholder="{{$user->user->UserName}}">
+              <input type="text" class="form-control" id="exampleInputName1" placeholder="{{$user->user->UserName}}">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Alamat Email</label>

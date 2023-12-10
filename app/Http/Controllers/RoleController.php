@@ -22,7 +22,7 @@ class RoleController extends Controller
     try{
 
         $role = $this->roleService->store($request->all());
-
+        
     }catch(\Exception $e){
 
         throw new \Exception($e->getMessage());

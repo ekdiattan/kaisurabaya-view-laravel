@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserAccount;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,21 +58,5 @@ class UserProfileController extends Controller
     
             DB::commit();
             return response($role);
-        }
-    
-        public function destroy(int $id)
-        {
-            try{
-                DB::beginTransaction();
-    
-                $role = UserProfile::find($id);
-                $role->delete();
-    
-            }catch (\Exception $e){
-                DB::rollBack();
-                throw new \Exception($e->getMessage());
-            }
-                DB::commit();
-                return response($role);
         }
 }
