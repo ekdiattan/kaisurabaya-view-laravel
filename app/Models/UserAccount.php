@@ -19,13 +19,17 @@ class UserAccount extends Authenticatable
         'email',
         'password',
         'UserNameId',
+        'UserRoleId',
         'UserAccountCreatedBy',
         'UserAccountUpdatedBy',
         'UserAccountDeletedBy',
     ];
 
-    public function user()
+    public function role()
     {
+        return $this->belongsTo(HakAkses::class, 'UserRoleId', 'EmployeeId');
+    }
+    public function user(){
         return $this->belongsTo(UserProfile::class, 'UserNameId', 'UserProfileId');
     }
 

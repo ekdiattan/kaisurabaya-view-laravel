@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\UserAccount;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ViewController;
 
 
 class UserProfileController extends Controller
 {   
+        protected $view;
+        public function __construct(ViewController $view)
+        {
+            $this->view = $view;
+        }
         public function index()
         {
             $role = UserProfile::all();
@@ -27,36 +34,48 @@ class UserProfileController extends Controller
             }
             DB::commit();
     
-            return response($role);
         }
         
         public function store(Request $request)
         {
             try{
                 DB::beginTransaction();
-                $role = UserProfile::create($request->all());
+                UserProfile::create($request->all());
             }catch (\Exception $e){
                 DB::rollBack();
                 throw new \Exception($e->getMessage());
             }
             DB::commit();
-    
-            return response($role);
+            
+            return redirect('/showemployee');
         }
-    
-        public function update(Request $request, $id)
+        
+        public function edit(int $id ,Request $request)
         {
+            $user = UserProfile::find($id);
+            $user->update($request->all());
+            
+            $adduser = $this->view->main();
+            $role = Role::all();
             try{
-                DB::beginTransaction();
-                $role = UserProfile::find($id);
-                $role->update($request->all());
-    
+                return view('editemployee', [
+                    'tittle' => 'Edit Pegawai',
+                    'user' => $adduser->user,
+                    'date' => $adduser->date,
+                    'greetings' => $adduser->greetings,
+                    'data' => $user,
+                    'role' => $role
+                ]);
             }catch (\Exception $e){
-                DB::rollBack();
                 throw new \Exception($e->getMessage());
-            }
-    
-            DB::commit();
-            return response($role);
         }
+        return redirect('/editemployee/{$id}');
+    }
+
+    public function destroy(int $id)
+    {
+
+        $user = UserProfile::find($id)->delete();
+        return redirect('/showemployee');
+    }
 }

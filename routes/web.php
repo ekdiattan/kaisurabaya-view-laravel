@@ -6,9 +6,12 @@ use App\Http\Controllers\ViewController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DisposisiController;
+use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\UserProfileController;
+use App\Models\SuratKeluar;
+use App\Models\UserProfile;
 
 Route::get('/', [ LoginController::class, 'login']);
 
@@ -30,9 +33,19 @@ Route::get('/disposisi', [ViewController::class, 'disposisi']);
 Route::get('/listsuratkeluar', [ViewController::class, 'listsuratkeluar']);
 Route::get('/suratmasuk', [ViewController::class, 'suratmasuk']);
 
+
+// User Account
+Route::post('/createuser', [UserAccountController::class, 'store']);
 Route::get('/showuser', [ViewController::class, 'usershow']);
 Route::get('/deleteuseraccount/{id}', [UserAccountController::class, 'destroy']);
+
+// Employee
 Route::get('/showemployee', [ViewController::class, 'showemployee']);
+Route::get('/addemployee', [ViewController::class, 'addemployee']);
+Route::get('/editemployee/{id}', [UserProfileController::class, 'edit']);
+Route::post('/editemployee/{id}', [UserProfileController::class, 'edit']);
+Route::get('/deleteemployee/{id}', [UserProfileController::class, 'destroy']);
+Route::post('/createemployee', [UserProfileController::class, 'store']);
 
 // Surat Masuk
 Route::post('/surateksternal/store', [SuratMasukController::class, 'storeeksternal'])->middleware('auth');
@@ -53,6 +66,9 @@ Route::get('deletedisposisi/{id}', [DisposisiController::class, 'destroy']);
 Route::post('editdisposisi/{id}', [DisposisiController::class, 'edit']);
 Route::get('editdisposisi/{id}', [DisposisiController::class, 'edit']);
 
+// Surat Keluar
+Route::post('/suratkeluar/store', [SuratKeluarController::class, 'store']);
+Route::get('deletesuratkeluar/{id}', [SuratKeluarController::class, 'destroy']);
 
-
-
+// dashboard
+Route::get('/dashboard', [ViewController::class, 'dashboard']);

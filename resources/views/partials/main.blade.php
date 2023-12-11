@@ -10,7 +10,7 @@
             <span></span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/main">
+            <a class="nav-link" href="/dashboard">
               <i class="fas fa-home"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -94,7 +94,7 @@
           <ul class="navbar-nav mr-lg-2">
             <li class="nav-item nav-search d-none d-lg-block">
               <div class="input-group">
-               
+                
               </div>
             </li>
           </ul>
@@ -107,7 +107,7 @@
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item" href="/setting">
                   <i class="fa-solid fa-gear"></i>
-                  
+                    Settings
                 </a>
                 <a class="dropdown-item" href="/logout">
                     <i class="fa-solid fa-right-from-bracket"></i>

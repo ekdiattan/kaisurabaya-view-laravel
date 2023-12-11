@@ -19,7 +19,7 @@ class LoginController extends Controller
         
         if (Auth::attempt(['email' => $email, 'password' => $password])) 
         {
-            return redirect()->intended('/main');
+            return redirect()->intended('/dashboard');
         } else {
             return back()->withErrors(['email' => 'Email atau kata sandi salah.']);
         }

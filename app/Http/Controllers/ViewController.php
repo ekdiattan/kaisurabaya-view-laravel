@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Disposisi;
+use App\Models\HakAkses;
 use App\Models\Role;
+use App\Models\SuratKeluar;
 use App\Models\SuratMasuk;
 use App\Models\UserAccount;
 use App\Models\UserProfile;
@@ -50,10 +52,26 @@ class ViewController extends Controller
     public function adduser()
     {
         $adduser = $this->main();
-
+        $user = UserProfile::all();
+        $employee = HakAkses::all();
+        
         return view('createuser', [
 
             'tittle' => 'Tambah Pengguna',
+            'user' => $adduser->user,
+            'date' =>$adduser->date,
+            'greetings' => $adduser->greetings,
+            'data' => $user,
+            'employee' => $employee
+        ]);
+    }
+    public function dashboard()
+    {
+        $adduser = $this->main();
+
+        return view('dashboard', [
+
+            'tittle' => 'Dashboard',
             'user' => $adduser->user,
             'date' =>$adduser->date,
             'greetings' => $adduser->greetings
@@ -107,13 +125,16 @@ class ViewController extends Controller
     public function suratkeluar()
     {
         $adduser = $this->main();
-
+        $suratkeluar = SuratKeluar::all();
+        $employee = UserProfile::all();
         return view('suratkeluar', 
         [
             'tittle' => 'Surat Keluar',
             'user' => $adduser->user,
             'date' => $adduser->date,
-            'greetings' => $adduser->greetings
+            'greetings' => $adduser->greetings,
+            'suratkeluar' => $suratkeluar,
+            'employee' => $employee
         ]);
     }
 
@@ -121,7 +142,7 @@ class ViewController extends Controller
     {
         $adduser = $this->main();
         $user = UserProfile::all();
-        
+
         return view('disposisi', [
 
             'tittle' => 'Surat Keluar',
@@ -132,16 +153,18 @@ class ViewController extends Controller
         ]);
     }
 
-    public function addsuratkeluar(){
-
+    public function addsuratkeluar(Request $request)
+    {
         $adduser = $this->main();
-
+        $user = UserProfile::all();
         return view('tambahsuratkeluar', [
 
             'tittle' => 'Tambah Surat Keluar',
             'user' => $adduser->user,
             'date' => $adduser->date,
-            'greetings' => $adduser->greetings
+            'greetings' => $adduser->greetings,
+            'employee' => $user,
+
         ]);
     }
 
@@ -188,7 +211,7 @@ class ViewController extends Controller
             'user' => $adduser->user,
             'date' => $adduser->date,
             'greetings' => $adduser->greetings,
-            'employee' => $employee
+            'employee' => $employee,
         ]);
     }
 
@@ -200,7 +223,7 @@ class ViewController extends Controller
             'tittle' => 'List Surat Keluar',
             'user' => $adduser->user,
             'date' => $adduser->date,
-            'greetings' => $adduser->greetings
+            'greetings' => $adduser->greetings,
         ]);
     }
 
@@ -233,6 +256,22 @@ class ViewController extends Controller
             'greetings' => $adduser->greetings,
             'disposisi' => $disposisi,
             'employee' => $user
+        ]);
+    }
+
+    public function addemployee()
+    {
+
+        $adduser = $this->main();
+        $role = Role::all();
+
+        return view('createemployee', 
+        [
+            'tittle' => 'Tambah Pegawai',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'role' => $role
         ]);
     }
 }

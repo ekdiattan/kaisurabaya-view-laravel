@@ -33,10 +33,10 @@
                 <td>{{$item->role->RoleName}}</td>
                 <td>{{$item->UserPhone}}</td>
                 <td class="text-success">
-                    <a href="/location-arrow" style="margin-right: 10px;">
+                    <a href="/editemployee/{{$item->UserProfileId}}" style="margin-right: 10px;">
                         <i class="fa-solid fa-pen-to-square"></i>                    
                     </a>
-                    <a href="/another-location" style="margin-right: 10px;">
+                    <a href="/deleteemployee/{{$item->UserProfileId}}" style="margin-right: 10px;">
                         <i class="fa-solid fa-trash"></i>                    
                     </a>
                 </td>

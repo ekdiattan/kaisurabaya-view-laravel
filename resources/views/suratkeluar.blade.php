@@ -10,30 +10,60 @@
           <thead>
             <tr>
               <th>No</th>
-              <th>Nomor Surat</th>
-              <th>Sifat Surat</th>
+              <th>Nomor Surat KAI</th>
+              <th>Nomor Surat Inputan</th>
               <th>Tanggal Surat</th>
-              <th>Action</th>
-              <th>Action</th>
-              <th>Action</th>
-              <th>Action</th>
-              <th>Action</th>
-              <th>Action</th>
-              <th>Action</th>
-              <th>Action</th>
-              <th>Action</th>
-              <th>Action</th>
+              <th>Sifat Surat</th>
+              <th>Surat Kepada</th>
+              <th>Perihal Surat</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>KA.SK/XII/01/2023</td>
-              <td>Surat Keluar Magang</td>
-              <td>08-12-2023</td>
-              <td>May 15, 2015</td>
+              @foreach ($suratkeluar as $item)
+              <td>{{$loop->iteration}}</td>
+              <td>{{$item->SuratGenerate}}</td>
+              <td>{{$item->NomorSurat}}</td>
+              <td>{{$item->SuratTanggal}}</td>
+              <td>
+                @if ($item->SuratSifat == 1)
+               <span>Surat Rahasia</span>
+               @elseif ($item->SuratSifat == 2)
+               <span>Surat Penting</span>
+               @elseif ($item->SuratSifat == 3)
+               <span>Surat Rutin</span>
+               @elseif ($item->SuratSifat == 4)
+               <span>Surat Terbatas</span>
+              @endif
+              </td>
+              <td>
+                @php $found = false @endphp
+                @foreach($employee as $roleItem)
+                    @if($roleItem->UserProfileId == $item->SuratTembusanInternal)
+                        {{ $roleItem->role->RoleName }} - {{ $roleItem->UserName}}
+                        @php $found = true @endphp
+                        @break
+                    @endif
+                @endforeach
+                @if(!$found)
+                    {{ $item->SuratTembusanInternal}}
+                @endif
+              </td>
+              <td>{{$item->SuratPerihal}}</td>
+              <td class="text-success">
+                <a href="/editsuratmasuk/{{$item->SuratKeluarId}}" style="margin-right: 10px;">
+                    <i class="fa-solid fa-pen-to-square"></i>                    
+                </a>
+                <a href="/deletesuratkeluar/{{$item->SuratKeluarId}}" style="margin-right: 10px;">
+                    <i class="fa-solid fa-trash"></i>                    
+                </a>
+                <a href="/map-marker">
+                    <i class="fa-solid fa-download"></i>                   
+                </a>
+              </td>        
             </tr>
+            @endforeach
           </tbody>
         </table>
       </div>

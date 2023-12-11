@@ -21,7 +21,7 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$item->user->UserName}}</td>
                 <td>{{$item->email}}</td>
-                <td>{{$item->user->role->RoleName}}</td>
+                <td>{{$item->role->EmployeeName}}</td>
                 <td class="text-success">
                         <a href="/location-arrow" style="margin-right: 10px;">
                             <i class="fa-solid fa-pen-to-square"></i>                    
