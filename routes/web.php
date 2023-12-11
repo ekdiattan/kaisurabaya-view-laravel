@@ -1,17 +1,18 @@
 <?php
 
 use App\Models\Disposisi;
+use App\Models\SuratKeluar;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DisposisiController;
-use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
+use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\UserProfileController;
-use App\Models\SuratKeluar;
-use App\Models\UserProfile;
 
 Route::get('/', [ LoginController::class, 'login']);
 
@@ -38,6 +39,8 @@ Route::get('/suratmasuk', [ViewController::class, 'suratmasuk']);
 Route::post('/createuser', [UserAccountController::class, 'store']);
 Route::get('/showuser', [ViewController::class, 'usershow']);
 Route::get('/deleteuseraccount/{id}', [UserAccountController::class, 'destroy']);
+Route::post('/edituseraccount/{id}', [UserAccountController::class, 'edit']);
+Route::get('/edituseraccount/{id}', [UserAccountController::class, 'edit']);
 
 // Employee
 Route::get('/showemployee', [ViewController::class, 'showemployee']);
@@ -54,9 +57,13 @@ Route::get('deletesuratmasuk/{id}', [SuratMasukController::class, 'destroy']);
 Route::get('editsuratmasuk/{id}', [SuratMasukController::class, 'edit']);
 Route::post('editsuratmasuk/{id}', [SuratMasukController::class, 'edit']);
 
-// Role
+// Role Jabatan
 Route::get('/role', [ViewController::class, 'role']);
-Route::get('/addrole', [ViewController::class, 'addrole']);
+Route::get('/addrole', [ViewController::class, 'addrole']); 
+
+Route::post('/addroles', [RoleController::class, 'store']);
+Route::get('/deleterole/{id}', [RoleController::class, 'destroy']);
+Route::get('editrole/{id}', [RoleController::class, 'edit']);
 
 // Disposisi
 Route::get('/addisposisi', [ViewController::class, 'disposisi']);

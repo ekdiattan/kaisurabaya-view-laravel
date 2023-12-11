@@ -53,6 +53,6 @@ class DisposisiController extends Controller
         }catch (\Exception $e){
             throw new \Exception($e->getMessage());
     }
-    return redirect('/suratmasuk');
-}
+        return redirect('/suratmasuk');
+    }
 }

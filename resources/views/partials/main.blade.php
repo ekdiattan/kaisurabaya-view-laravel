@@ -66,6 +66,8 @@
                 <li class="nav-item"> <a class="nav-link" href="/adduser">Tambah User</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/role">List Jabatan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/addrole">Tambah Jabatan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/hakakses">List Hak Akses</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/addhakases">Tambah Hak Akses</a></li>
               </ul>
             </div>
           </li>

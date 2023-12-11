@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Role extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $primaryKey = 'RoleId';
 
     protected $table = 'masterroles';
 
-    protected $fillable = [
-    'RoleName',
-    'RoleCode',
+    protected $fillable = 
+    [
+        'RoleName',
+        'RoleCode',
     ];
 
     const CREATED_AT = 'RoleCreatedAt';
     const UPDATED_AT = 'RoleUpdatedAt';
-    const DELETED_AT = 'RoleDeletedAt';
 }

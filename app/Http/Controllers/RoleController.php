@@ -2,82 +2,89 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RoleRequest;
+use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Services\RoleService;
+use App\Http\Requests\RoleRequest;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
+    protected $view;
 
-    protected $roleService;
-
-    public function __construct(RoleService $roleService)
+    public function __construct(ViewController $view)
     {
-        $this->roleService = $roleService;
+        $this->view = $view;
     }
 
-    public function store(RoleRequest $request){
-
+    public function store(Request $request)
+    {
     try{
+        Role::create($request->all());
 
-        $role = $this->roleService->store($request->all());
-        
+
     }catch(\Exception $e){
 
         throw new \Exception($e->getMessage());
     }
-        return $this->successResponse($role);
+        return redirect('/role');
     }
 
     public function index()
     {
         try{
-            $role = $this->roleService->index();
+            // $role = $this->roleService->index();
         }catch (\Exception $e){
 
             return $this->sendError($e->getMessage());
         }
-        return $this->successResponse($role);
+        // return $this->successResponse($role);
     }
 
     public function show($id)
     {
         try{
 
-            $role = $this->roleService->show($id);
+            // $role = $this->roleService->show($id);
 
         }catch (\Exception $e){
 
             return $this->sendError($e->getMessage());
         }
-        return $this->successResponse($role);
-    }
-
-    public function update(Request $request, $id)
-    {
-        try{
-            $role= $this->roleService->update($request->all(), $id);
-
-        }catch (\Exception $e){
-        DB::rollBack();
-            return $this->sendError($e->getMessage());
-        }
-
-        DB::commit();
-        return $this->successResponse($role);
+        // return $this->successResponse($role);
     }
 
     public function destroy(int $id)
     {
         try{
-
-            $role = $this->roleService->destroy($id);
+            $role = Role::find($id);
+            $role->delete();
 
         }catch (\Exception $e){
             return $this->sendError($e->getMessage());
         }
-        return $this->successResponse($role);
+        return redirect('/role');
+    }
+
+    public function edit(int $id ,Request $request)
+    {
+        $user = Role::find($id);
+        $user->update($request->all());
+
+        $adduser = $this->view->main();
+        try{
+            return view('editrole', 
+            [
+                'tittle' => 'Edit Role',
+                'user' => $adduser->user,
+                'date' => $adduser->date,
+                'greetings' => $adduser->greetings,
+                'data' => $user
+            ]);
+        }catch (\Exception $e){
+            throw new \Exception($e->getMessage());
+        }
+        return redirect('/role');
     }
 }
 

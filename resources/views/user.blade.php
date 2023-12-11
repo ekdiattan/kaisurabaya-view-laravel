@@ -23,7 +23,7 @@
                 <td>{{$item->email}}</td>
                 <td>{{$item->role->EmployeeName}}</td>
                 <td class="text-success">
-                        <a href="/location-arrow" style="margin-right: 10px;">
+                        <a href="/edituseraccount/{{$item->UserAccountId}}" style="margin-right: 10px;">
                             <i class="fa-solid fa-pen-to-square"></i>                    
                         </a>
                         <a href="/deleteuseraccount/{{$item->UserAccountId}}" style="margin-right: 10px;">

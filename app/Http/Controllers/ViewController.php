@@ -274,4 +274,21 @@ class ViewController extends Controller
             'role' => $role
         ]);
     }
+
+    public function addrole()
+    {
+
+        $adduser = $this->main();
+        $employee = Role::all();
+
+        return view('addrole',
+        [
+            'tittle' => 'Tambah Pegawai',
+            'user' => $adduser->user,
+            'date' => $adduser->date,
+            'greetings' => $adduser->greetings,
+            'employee' => $employee
+        ]);
+        
+    }
 }
