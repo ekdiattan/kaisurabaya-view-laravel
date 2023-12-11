@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
-use App\Services\RoleService;
-use App\Http\Requests\RoleRequest;
 use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
@@ -54,16 +52,19 @@ class RoleController extends Controller
         // return $this->successResponse($role);
     }
 
-    public function destroy(int $id)
+    public function delete(int $id)
     {
         try{
-            $role = Role::find($id);
-            $role->delete();
-
+            DB::beginTransaction();
+            
+            $user = Role::find($id);
+            $user->delete();
+            
         }catch (\Exception $e){
-            return $this->sendError($e->getMessage());
+            DB::rollBack();
         }
-        return redirect('/role');
+            DB::commit();
+            return redirect('/role');
     }
 
     public function edit(int $id ,Request $request)

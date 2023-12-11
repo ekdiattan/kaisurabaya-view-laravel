@@ -62,8 +62,9 @@ Route::get('/role', [ViewController::class, 'role']);
 Route::get('/addrole', [ViewController::class, 'addrole']); 
 
 Route::post('/addroles', [RoleController::class, 'store']);
-Route::get('/deleterole/{id}', [RoleController::class, 'destroy']);
+Route::get('/deleterole/{id}', [RoleController::class, 'delete']);
 Route::get('editrole/{id}', [RoleController::class, 'edit']);
+Route::post('editrole/{id}', [RoleController::class, 'edit']);
 
 // Disposisi
 Route::get('/addisposisi', [ViewController::class, 'disposisi']);
@@ -76,6 +77,7 @@ Route::get('editdisposisi/{id}', [DisposisiController::class, 'edit']);
 // Surat Keluar
 Route::post('/suratkeluar/store', [SuratKeluarController::class, 'store']);
 Route::get('deletesuratkeluar/{id}', [SuratKeluarController::class, 'destroy']);
+Route::get('editsuratkeluar/{id}', [SuratKeluarController::class, 'edit']);
 
 // dashboard
 Route::get('/dashboard', [ViewController::class, 'dashboard']);

@@ -52,7 +52,7 @@
               </td>
               <td>{{$item->SuratPerihal}}</td>
               <td class="text-success">
-                <a href="/editsuratmasuk/{{$item->SuratKeluarId}}" style="margin-right: 10px;">
+                <a href="/editsuratkeluar/{{$item->SuratKeluarId}}" style="margin-right: 10px;">
                     <i class="fa-solid fa-pen-to-square"></i>                    
                 </a>
                 <a href="/deletesuratkeluar/{{$item->SuratKeluarId}}" style="margin-right: 10px;">

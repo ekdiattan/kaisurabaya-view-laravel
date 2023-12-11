@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ViewController;
+
 
 class SuratKeluarController extends Controller
 {
+    protected $view;
+    public function __construct(ViewController $view)
+    {
+        $this->view = $view;
+    }
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -64,5 +72,27 @@ class SuratKeluarController extends Controller
 
         SuratKeluar::find($id)->delete();
         return redirect('/suratkeluar');
+    }
+
+    public function edit(int $id ,Request $request)
+        {
+            $user = SuratKeluar::find($id);
+            $user->update($request->all());
+            
+            $adduser = $this->view->main();
+            $role = Role::all();
+            try{
+                return view('editsuratkeluar', [
+                    'tittle' => 'Edit Surat Keluar',
+                    'user' => $adduser->user,
+                    'date' => $adduser->date,
+                    'greetings' => $adduser->greetings,
+                    'data' => $user,
+                    'role' => $role
+                ]);
+            }catch (\Exception $e){
+                throw new \Exception($e->getMessage());
+        }
+        return redirect('/suratmasuk');
     }
 }
