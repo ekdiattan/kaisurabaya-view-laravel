@@ -81,4 +81,48 @@ class AuthController extends Controller
         }
         return $this->successResponse($user);
     }
+
+    public function update(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            $password = Hash::make($request->input('password'));
+            if ($request->input('password')) 
+            {
+                $user->update([
+                    'password' => $password,
+                ]);
+            }else{
+                $user->update([
+                    'email' => $request->input('email'),
+                ]);
+            }
+            if ($request->hasFile('UserImages')) 
+            {
+                $file = $request->file('UserImages');
+                $file->store('public/images');
+
+                $path = "images/" . $file->hashName();
+                $userProfile = UserProfile::where('UserProfileId', $user->UserNameId)->first();
+
+                $userProfile->update([
+                    'UserImages' => $path,
+                ]);
+            }
+            
+            if ($request->input('UserName')) 
+            {
+                $userProfile = UserProfile::where('UserProfileId', $user->UserNameId)->first();
+                if ($userProfile) {
+                    $userProfile->update([
+                        'UserName' => $request->input('UserName'),
+                    ]);
+                }
+            }
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+        return redirect('/setting');
+    }
+
 }

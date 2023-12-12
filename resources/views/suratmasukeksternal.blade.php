@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Tambah Surat Eksternal</h4>
-            <form class="forms-sample" action="surateksternal/store" method="POST">
+            <form class="forms-sample" action="surateksternal/store" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
                 <label for="exampleInputName1">Nomor Surat</label>
@@ -21,7 +21,7 @@
               </div>
               <div class="form-group">
                 <label>File Surat</label>
-                <input type="file" class="form-control" id="exampleInputName1" placeholder="Name">
+                <input type="file" class="form-control" id="exampleInputName1" placeholder="FileSurat" name="FileSurat">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Diteruskan Kepada</label>

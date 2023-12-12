@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Role;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\PDF as PDF;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ViewController;
-use App\Models\Role;
 
 class SuratMasukController extends Controller
 {
@@ -36,8 +37,23 @@ class SuratMasukController extends Controller
                 'XII' => 12
             ];
 
-            $input = $request->all();
-            $success = SuratMasuk::create($input);
+            $path = null; // or any default value
+
+            if ($request->hasFile('FileSurat')) {
+                $file = $request->file('FileSurat');
+                $path = $file->store('public/file');
+                $originalName = $file->getClientOriginalName();
+                
+                $input = $request->except('FileSurat');
+                $input['FileSurat'] = $path;
+                $input['FileSuratAsli'] = $originalName;
+            
+                $success = SuratMasuk::create($input);
+            } else {
+                $input = $request->except('FileSurat');
+                $success = SuratMasuk::create($input);
+            }
+            
 
             // Generate Code
             $flippedRoman = array_flip($roman); 
@@ -45,7 +61,8 @@ class SuratMasukController extends Controller
             $code = "KA." . "SM" . "/" . $bulanRomawi . "/" . $success->SuratMasukId . "/" . date('Y');
 
             // Update Code
-            $suratMasuk = SuratMasuk::find($success->SuratMasukId);
+            $suratMasuk = SuratMasuk::find($success['SuratMasukId']);
+
             $suratMasuk->update([
                 'SuratGenerate' => $code,
                 'JenisSurat' => $id
@@ -99,11 +116,27 @@ class SuratMasukController extends Controller
         public function edit(int $id ,Request $request)
         {
             $user = SuratMasuk::find($id);
-            $user->update($request->all());
-            
+        
+            if ($request->hasFile('FileSurat')) {
+                $file = $request->file('FileSurat');
+                $path = $file->store('public/files');
+                $path = str_replace('public/', '', $path);
+
+                $originalName = $file->getClientOriginalName();
+        
+                $user->update([
+                    'FileSurat' => $path,
+                    'FileSuratAsli' => $originalName
+                ]);
+            }
+        
+            // Update input lainnya kecuali FileSurat
+            $input = $request->except('FileSurat');
+            $user->update($input);
+        
             $adduser = $this->view->main();
             $role = Role::all();
-            try{
+            try {
                 return view('editsuratmasuk', [
                     'tittle' => 'Edit Surat Masuk',
                     'user' => $adduser->user,
@@ -112,9 +145,33 @@ class SuratMasukController extends Controller
                     'data' => $user,
                     'role' => $role
                 ]);
-            }catch (\Exception $e){
+            } catch (\Exception $e) {
                 throw new \Exception($e->getMessage());
+            }
+            return redirect('/suratmasuk');
         }
-        return redirect('/suratmasuk');
-    }
+
+        public function download($id)
+        {
+            $suratMasuk = SuratMasuk::find($id);
+            $filePath = storage_path('app/public/' . $suratMasuk->FileSurat);
+            return response()->download($filePath);
+        }
+
+        public function generatePDF(int $id)
+        {
+            try {
+                $surat = SuratMasuk::find($id);
+
+                $data = [
+                    'surat' => $surat
+                ];
+
+                $pdf = app('dompdf.wrapper')->loadView('PDF/SuratMasukPDF', $data);
+                return $pdf->download('itsolutionstuff.pdf');
+
+            } catch (\Exception $e) {
+                throw new \Exception($e->getMessage());
+            }
+        }
 }   

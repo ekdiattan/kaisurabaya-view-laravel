@@ -44,8 +44,7 @@
                     {{ $item->DiteruskanKepada }}
                 @endif
             </td>
-            
-              <td>{{$item->PerihalSurat}}</td>
+            <td>{{$item->PerihalSurat}}</td>
               <td class="text-success">
                 <a href="/editsuratmasuk/{{$item->SuratMasukId}}" style="margin-right: 10px;">
                     <i class="fa-solid fa-pen-to-square"></i>                    
@@ -53,7 +52,7 @@
                 <a href="/deletesuratmasuk/{{$item->SuratMasukId}}" style="margin-right: 10px;">
                     <i class="fa-solid fa-trash"></i>                    
                 </a>
-                <a href="/map-marker">
+                <a href="/generatePDF/{{$item->SuratMasukId}}">
                     <i class="fa-solid fa-download"></i>                   
                 </a>
               </td>            

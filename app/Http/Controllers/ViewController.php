@@ -176,7 +176,7 @@ class ViewController extends Controller
         
         return view('suratmasuk', 
         [
-            'tittle' => 'List Surat Keluar',
+            'tittle' => 'List Surat Masuk',
             'user' => $adduser->user,
             'date' => $adduser->date,
             'greetings' => $adduser->greetings,

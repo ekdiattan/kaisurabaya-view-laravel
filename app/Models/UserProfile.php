@@ -28,6 +28,7 @@ class UserProfile extends Authenticatable
         'UserGender',
         'UserRoleId',
         'UserPhone',
+        'UserImages',
         'UserProfileCreatedBy',
         'UserProfileUpdatedBy',
         'UserProfileDeletedBy',

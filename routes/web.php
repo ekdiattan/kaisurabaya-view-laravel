@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Models\Disposisi;
 use App\Models\SuratKeluar;
 use App\Models\UserProfile;
@@ -56,6 +57,8 @@ Route::post('/suratinternal/store', [SuratMasukController::class, 'storeinternal
 Route::get('deletesuratmasuk/{id}', [SuratMasukController::class, 'destroy']);
 Route::get('editsuratmasuk/{id}', [SuratMasukController::class, 'edit']);
 Route::post('editsuratmasuk/{id}', [SuratMasukController::class, 'edit']);
+Route::get('/downloadsuratmasuk/{id}', [SuratMasukController::class, 'download'])->name('download.file');
+Route::get('/generatePDF/{id}', [SuratMasukController::class, 'generatePDF']);
 
 // Role Jabatan
 Route::get('/role', [ViewController::class, 'role']);
@@ -78,6 +81,11 @@ Route::get('editdisposisi/{id}', [DisposisiController::class, 'edit']);
 Route::post('/suratkeluar/store', [SuratKeluarController::class, 'store']);
 Route::get('deletesuratkeluar/{id}', [SuratKeluarController::class, 'destroy']);
 Route::get('editsuratkeluar/{id}', [SuratKeluarController::class, 'edit']);
+Route::post('editsuratkeluar/{id}', [SuratKeluarController::class, 'edit']);
+
 
 // dashboard
 Route::get('/dashboard', [ViewController::class, 'dashboard']);
+
+// Auth
+Route::post('/updateuseraccount', [AuthController::class, 'update']);

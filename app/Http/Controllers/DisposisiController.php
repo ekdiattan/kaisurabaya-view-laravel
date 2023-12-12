@@ -22,7 +22,15 @@ class DisposisiController extends Controller
 
     public function store(Request $request)
     {
-        Disposisi::create($request->all());
+        if($request->hasFile('FileSurat'))
+        {
+            $file = $request->file('File');
+            $file->store('public/files');
+            $path = "files/" . $file->hashName();
+        }
+        Disposisi::create([$request->all()
+        , 'FileSurat' => $path
+        ]);
         return redirect('/listdisposisi');
     }
 

@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ViewController;
 
-
 class SuratKeluarController extends Controller
 {
     protected $view;
@@ -47,7 +46,7 @@ class SuratKeluarController extends Controller
                 'XI' => 11,
                 'XII' => 12
             ];
-
+            
             $input = $request->all();
             $success = SuratKeluar::create($input);
 
@@ -95,4 +94,11 @@ class SuratKeluarController extends Controller
         }
         return redirect('/suratmasuk');
     }
+
+    public function download($id)
+        {
+            $suratKeluar = SuratKeluar::find($id);
+            $filePath = storage_path('app/public/' . $suratKeluar->FileSurat);
+            return response()->download($filePath);
+        }
 }

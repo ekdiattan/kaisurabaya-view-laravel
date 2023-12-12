@@ -9,7 +9,7 @@
         @else
           <h4 class="card-title">Edit Surat Internal</h4>
         @endif
-        <form class="forms-sample" action="/editsuratmasuk/{{$data->SuratMasukId}}" method="POST">
+        <form class="forms-sample" action="/editsuratmasuk/{{$data->SuratMasukId}}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <label for="exampleInputName1">Nomor Surat KAI</label>
@@ -32,10 +32,12 @@
             <div class="input-group">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="customFile" name="FileSurat">
-                    <label class="custom-file-label" for="customFile">Pilih file</label>
+                    <label class="custom-file-label" for="customFile">{{$data->FileSuratAsli}}</label>
                 </div>
                 <div class="input-group-append">
-                  <i class="fas fa-eye" style="margin-top: 10px; margin-left:10px; color:#1b55d1"></i>
+                  <a href="/downloadsuratmasuk/{{$data->SuratMasukId}}">
+                    <i class="fas fa-eye" style="margin-top: 10px; margin-left:10px; color:#1b55d1"></i>
+                  </a>
                 </div>
             </div>
         </div>

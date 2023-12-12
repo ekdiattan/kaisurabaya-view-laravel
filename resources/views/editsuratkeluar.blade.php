@@ -9,7 +9,7 @@
         @else
           <h4 class="card-title">Edit Surat Internal</h4>
         @endif
-        <form class="forms-sample" action="/editsuratmasuk/{{$data->SuratKeluarId}}" method="POST">
+        <form class="forms-sample" action="/editsuratkeluar/{{$data->SuratKeluarId}}" method="POST">
           @csrf
           <div class="form-group">
             <label for="exampleInputName1">Nomor Surat KAI</label>
@@ -33,7 +33,7 @@
           </div>
         <div class="form-group">
             <label for="exampleInputName1">Diteruskan Kepada</label>
-            <select class="form-control" id="exampleSelectGender" name="DiteruskanKepada">
+            <select class="form-control" id="exampleSelectGender" name="SuratTembusanInternal">
                 @foreach ($role as $item)
                     @if($item->RoleId == $data->SuratTembusanInternal)
                         <option value="{{ $item->RoleId }}" selected>{{ $item->RoleName }}</option>
@@ -42,8 +42,6 @@
                     @endif
                 @endforeach
             </select>
-              <input type="type" class="form-control" id="exampleInputEmail3" name="DiteruskanKepada" value="{{$data->DiteruskanKepada}}">
-            @endif
           </div>
           <button type="submit" class="btn btn-primary mr-2">Ubah</button>
           <button type="button" class="btn btn-primary mr-2" onclick="navigateTo()">Cancel</button>
