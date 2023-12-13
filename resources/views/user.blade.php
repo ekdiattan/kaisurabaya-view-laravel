@@ -16,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($users as $item)
+                @foreach ($useraccount as $item)
               <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$item->user->UserName}}</td>

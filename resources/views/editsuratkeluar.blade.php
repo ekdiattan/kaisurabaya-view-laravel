@@ -4,11 +4,7 @@
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        @if($data->SifatSurat == 1)
-          <h4 class="card-title">Edit Surat Eksternal</h4>
-        @else
-          <h4 class="card-title">Edit Surat Internal</h4>
-        @endif
+          <h4 class="card-title">Edit Surat Keluar</h4>
         <form class="forms-sample" action="/editsuratkeluar/{{$data->SuratKeluarId}}" method="POST">
           @csrf
           <div class="form-group">
@@ -30,6 +26,10 @@
           <div class="form-group">
             <label for="exampleInputEmail3">Kepada Yth</label>
             <input type="text" class="form-control" id="exampleInputEmail3" value="{{$data->SuratKepada}}" name="SuratKepada">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Divisi</label>
+            <input type="text" class="form-control" id="exampleInputEmail3" value="{{$data->SuratDivisi}}" name="SuratDivisi">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Perihal</label>

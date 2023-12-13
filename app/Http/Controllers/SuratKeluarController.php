@@ -111,9 +111,11 @@ class SuratKeluarController extends Controller
         {
             try {
                 $surat = SuratKeluar::find($id);
+                $user = UserProfile::all();
 
                 $data = [
-                    'surat' => $surat
+                    'surat' => $surat, 
+                    'user' => $user
                 ];
                 
                 $pdf = app('dompdf.wrapper')->loadView('PDF/SuratKeluarPDF', $data);

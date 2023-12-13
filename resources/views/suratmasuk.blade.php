@@ -52,9 +52,9 @@
                 <a href="/deletesuratmasuk/{{$item->SuratMasukId}}" style="margin-right: 10px;">
                     <i class="fa-solid fa-trash"></i>                    
                 </a>
-                <a href="/generatePDF/{{$item->SuratMasukId}}">
+                {{-- <a href="/generatePDF/{{$item->SuratMasukId}}">
                     <i class="fa-solid fa-download"></i>                   
-                </a>
+                </a> --}}
               </td>            
             </tr>
             @endforeach

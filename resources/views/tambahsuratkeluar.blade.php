@@ -9,15 +9,15 @@
           @csrf
           <div class="form-group">
             <label for="exampleInputName1">Nomor Surat</label>
-            <input type="text" class="form-control" id="exampleInputName1" placeholder="Name"  name="NomorSurat" required>
+            <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="NomorSurat">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Tanggal Surat</label>
-            <input type="date" class="form-control" id="exampleInputEmail3" name="SuratTanggal" required>
+            <input type="date" class="form-control" id="exampleInputEmail3" name="SuratTanggal" >
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Sifat Surat</label>
-            <select class="form-control" id="exampleSelectGender" name="SuratSifat" required>
+            <select class="form-control" id="exampleSelectGender" name="SuratSifat" >
                 <option value="1">Rahasia</option>
                 <option value="2">Penting</option>
                 <option value="3">Rutin</option>
@@ -26,27 +26,31 @@
             </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Lampiran</label>
-            <input type="number" class="form-control" id="exampleInputEmail3" placeholder="ex :1" name="SuratLampiran" required>
+            <input type="number" class="form-control" id="exampleInputEmail3" placeholder="ex :1" name="SuratLampiran" >
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Kepada  Yth</label>
-            <input type="text" class="form-control" id="exampleInputEmail3" name="SuratKepada" required>
+            <input type="text" class="form-control" id="exampleInputEmail3" name="SuratKepada" >
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Divisi</label>
+            <input type="text" class="form-control" id="exampleInputEmail3" name="SuratDivisi" >
           </div>
           <div class="form-group">
             <label for="exampleInputCity1">Perihal</label>
-            <input type="text" class="form-control" id="exampleInputCity1" name="SuratPerihal" required>
+            <input type="text" class="form-control" id="exampleInputCity1" name="SuratPerihal" >
           </div>
           <div class="form-group">
-            <label for="exampleInputCity1">Isi Surat</label>
-            <input type="text" class="form-control" id="exampleInputCity1" name="SuratIsi" required>
+            <label for="exampleFormControlTextarea1">Isi Surat</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="SuratIsi"></textarea>
           </div>
           <div class="form-group">
             <label for="exampleInputCity1">Tembusan Eksternal</label>
-            <input type="text" class="form-control" id="exampleInputCity1"name="SuratTembusanEksternal" required>
+            <input type="text" class="form-control" id="exampleInputCity1"name="SuratTembusanEksternal" >
           </div>
           <div class="form-group">
             <label for="exampleInputCity1">Tembusan Internal</label>
-            <select class="form-control" id="exampleSelectGender" name="SuratTembusanInternal" required>
+            <select class="form-control" id="exampleSelectGender" name="SuratTembusanInternal" >
               @foreach ($employee as $item)
                 <option value="{{ $item->UserProfileId }}">{{ $item->role->RoleName}} - {{ $item->UserName}}</option>
               @endforeach

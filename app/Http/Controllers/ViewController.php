@@ -188,14 +188,15 @@ class ViewController extends Controller
     public function usershow()
     {
         $adduser = $this->main();
-        $users = UserAccount::all();
+        $useraccount = UserAccount::all();
+
         return view('user', 
         [
             'tittle' => 'List Pengguna',
             'user' => $adduser->user,
             'date' => $adduser->date,
             'greetings' => $adduser->greetings,
-            'users' => $users
+            'useraccount' => $useraccount
         ]);
     }
 
@@ -250,7 +251,7 @@ class ViewController extends Controller
 
         return view('listdisposisi',
         [
-            'tittle' => 'List Jabatan',
+            'tittle' => 'Disposisi',
             'user' => $adduser->user,
             'date' => $adduser->date,
             'greetings' => $adduser->greetings,

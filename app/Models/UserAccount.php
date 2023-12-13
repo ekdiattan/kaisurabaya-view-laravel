@@ -29,7 +29,8 @@ class UserAccount extends Authenticatable
     {
         return $this->belongsTo(HakAkses::class, 'UserRoleId', 'EmployeeId');
     }
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(UserProfile::class, 'UserNameId', 'UserProfileId');
     }
 

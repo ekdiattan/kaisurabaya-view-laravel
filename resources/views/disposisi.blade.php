@@ -45,7 +45,7 @@
           </div>
           <div class="form-group">
             <label for="exampleInputCity1">Diteruskan Kepada</label>
-            <select class="form-control" id="exampleSelectGender" name="DisposisiDigunakanKembali">
+            <select class="form-control" id="exampleSelectGender" name="DisposisiDiteruskanKepada">
                 @foreach ($employee as $item)
                   <option value="{{ $item->UserProfileId }}">{{ $item->UserName }} - {{ $item->role->RoleName }}</option>
                 @endforeach
