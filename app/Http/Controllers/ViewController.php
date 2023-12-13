@@ -145,7 +145,7 @@ class ViewController extends Controller
 
         return view('disposisi', [
 
-            'tittle' => 'Surat Keluar',
+            'tittle' => 'Disposisi',
             'user' => $adduser->user,
             'date' => $adduser->date,
             'greetings' => $adduser->greetings,

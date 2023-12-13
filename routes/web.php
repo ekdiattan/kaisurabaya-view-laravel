@@ -82,6 +82,8 @@ Route::post('/suratkeluar/store', [SuratKeluarController::class, 'store']);
 Route::get('deletesuratkeluar/{id}', [SuratKeluarController::class, 'destroy']);
 Route::get('editsuratkeluar/{id}', [SuratKeluarController::class, 'edit']);
 Route::post('editsuratkeluar/{id}', [SuratKeluarController::class, 'edit']);
+Route::get('/generatePDFSuratKeluar/{id}', [SuratKeluarController::class, 'generatePDF']);
+
 
 
 // dashboard

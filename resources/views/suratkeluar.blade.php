@@ -58,7 +58,7 @@
                 <a href="/deletesuratkeluar/{{$item->SuratKeluarId}}" style="margin-right: 10px;">
                     <i class="fa-solid fa-trash"></i>                    
                 </a>
-                <a href="/map-marker">
+                <a href="/generatePDFSuratKeluar/{{$item->SuratKeluarId}}">
                     <i class="fa-solid fa-download"></i>                   
                 </a>
               </td>        

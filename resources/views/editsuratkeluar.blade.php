@@ -25,30 +25,43 @@
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Lampiran</label>
-            <input type="date" class="form-control" id="exampleInputEmail3" value="{{$data->SuratLampiran}}" name="SuratLampiran">
+            <input type="text" class="form-control" id="exampleInputEmail3" value="{{$data->SuratLampiran}}" name="SuratLampiran">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Kepada Yth</label>
+            <input type="text" class="form-control" id="exampleInputEmail3" value="{{$data->SuratKepada}}" name="SuratKepada">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Perihal</label>
             <input type="text" class="form-control" id="exampleInputEmail3" value="{{$data->SuratPerihal}}" name="SuratPerihal">
           </div>
-        <div class="form-group">
-            <label for="exampleInputName1">Diteruskan Kepada</label>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Isi surat</label>
+            <input type="text" class="form-control" id="exampleInputEmail3" value="{{$data->SuratIsi}}" name="SuratIsi">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName1">Surat Tembusan Internal</label>
             <select class="form-control" id="exampleSelectGender" name="SuratTembusanInternal">
-                @foreach ($role as $item)
-                    @if($item->RoleId == $data->SuratTembusanInternal)
-                        <option value="{{ $item->RoleId }}" selected>{{ $item->RoleName }}</option>
-                    @else
-                        <option value="{{ $item->RoleId }}">{{ $item->RoleName }}</option>
-                    @endif
-                @endforeach
+              @foreach ($employee as $item)
+                @if ($item->UserProfileId == $data->SuratTembusanInternal)
+                  <option value="{{ $item->UserProfileId }}" selected>{{ $item->role->RoleName }} - {{ $item->UserName }}</option>
+                @else
+                  <option value="{{ $item->UserProfileId }}">{{ $item->role->RoleName }} - {{ $item->UserName }}</option>
+                @endif
+              @endforeach
             </select>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Surat Tembusan Eksternal</label>
+            <input type="text" class="form-control" id="exampleInputEmail3" value="{{$data->SuratTembusanEksternal}}" name="SuratTembusanEksternal">
+          </div>
           </div>
           <button type="submit" class="btn btn-primary mr-2">Ubah</button>
           <button type="button" class="btn btn-primary mr-2" onclick="navigateTo()">Cancel</button>
         </form>
       </div>
       <script>
-        function navigateTo() {
+        function navigateTo() 
+        {
             window.location.href = "/suratmasuk";
         }
     </script>  

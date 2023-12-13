@@ -7,6 +7,8 @@ use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ViewController;
+use App\Models\HakAkses;
+use App\Models\UserProfile;
 
 class SuratKeluarController extends Controller
 {
@@ -80,14 +82,17 @@ class SuratKeluarController extends Controller
             
             $adduser = $this->view->main();
             $role = Role::all();
+            $employee = UserProfile::all();
             try{
-                return view('editsuratkeluar', [
+                return view('editsuratkeluar', 
+                [
                     'tittle' => 'Edit Surat Keluar',
                     'user' => $adduser->user,
                     'date' => $adduser->date,
                     'greetings' => $adduser->greetings,
                     'data' => $user,
-                    'role' => $role
+                    'role' => $role,
+                    'employee' => $employee
                 ]);
             }catch (\Exception $e){
                 throw new \Exception($e->getMessage());
@@ -101,4 +106,23 @@ class SuratKeluarController extends Controller
             $filePath = storage_path('app/public/' . $suratKeluar->FileSurat);
             return response()->download($filePath);
         }
+    
+        public function generatePDF(int $id)
+        {
+            try {
+                $surat = SuratKeluar::find($id);
+
+                $data = [
+                    'surat' => $surat
+                ];
+                
+                $pdf = app('dompdf.wrapper')->loadView('PDF/SuratKeluarPDF', $data);
+                $namaFile = $surat->SuratGenerate;
+                return $pdf->download($namaFile . '.pdf');
+
+            } catch (\Exception $e) {
+                throw new \Exception($e->getMessage());
+            }
+        }
+
 }

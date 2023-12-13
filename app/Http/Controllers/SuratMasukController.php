@@ -22,7 +22,8 @@ class SuratMasukController extends Controller
     {
         try {
             $date = date('m');
-            $roman = [
+            $roman = 
+            [
                 'I' => 1,
                 'II' => 2,
                 'III' => 3,
@@ -37,7 +38,7 @@ class SuratMasukController extends Controller
                 'XII' => 12
             ];
 
-            $path = null; // or any default value
+            $path = null;
 
             if ($request->hasFile('FileSurat')) {
                 $file = $request->file('FileSurat');
@@ -137,7 +138,8 @@ class SuratMasukController extends Controller
             $adduser = $this->view->main();
             $role = Role::all();
             try {
-                return view('editsuratmasuk', [
+                return view('editsuratmasuk', 
+                [
                     'tittle' => 'Edit Surat Masuk',
                     'user' => $adduser->user,
                     'date' => $adduser->date,
@@ -154,8 +156,10 @@ class SuratMasukController extends Controller
         public function download($id)
         {
             $suratMasuk = SuratMasuk::find($id);
-            $filePath = storage_path('app/public/' . $suratMasuk->FileSurat);
-            return response()->download($filePath);
+            $filePath = storage_path('app/' . $suratMasuk->FileSurat);
+            $originalName = $suratMasuk->FileSuratAsli;
+            
+            return response()->download($filePath, $originalName);
         }
 
         public function generatePDF(int $id)
@@ -168,7 +172,8 @@ class SuratMasukController extends Controller
                 ];
 
                 $pdf = app('dompdf.wrapper')->loadView('PDF/SuratMasukPDF', $data);
-                return $pdf->download('itsolutionstuff.pdf');
+                $namaFile = $surat->SuratGenerate;
+                return $pdf->download( 'SuratMasuk.'.$namaFile .'.pdf');
 
             } catch (\Exception $e) {
                 throw new \Exception($e->getMessage());
