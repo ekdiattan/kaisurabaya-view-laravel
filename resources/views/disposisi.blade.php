@@ -13,7 +13,7 @@
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Kode</label>
-            <input type="text" class="form-control" id="exampleInputEmail3" name="DisposisiKode">
+            <input type="text" class="form-control" id="exampleInputEmail3" name="DisposisiKode" placeholder=" ex. KAI.01">
           </div> 
           <div class="form-group">
             <label for="exampleInputEmail3">Nomor Surat</label>

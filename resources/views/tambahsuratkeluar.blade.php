@@ -7,10 +7,10 @@
         <h4 class="card-title">Tambah Surat Keluar</h4>
         <form class="forms-sample" action="/suratkeluar/store" method="POST">
           @csrf
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="exampleInputName1">Nomor Surat</label>
             <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="NomorSurat">
-          </div>
+          </div> --}}
           <div class="form-group">
             <label for="exampleInputEmail3">Tanggal Surat</label>
             <input type="date" class="form-control" id="exampleInputEmail3" name="SuratTanggal" >

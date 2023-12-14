@@ -11,7 +11,7 @@
             <tr>
               <th>No</th>
               <th>Nomor Surat KAI</th>
-              <th>Nomor Surat Inputan</th>
+              {{-- <th>Nomor Surat Inputan</th> --}}
               <th>Tanggal Surat</th>
               <th>Sifat Surat</th>
               <th>Surat Kepada</th>
@@ -24,7 +24,7 @@
               @foreach ($suratkeluar as $item)
               <td>{{$loop->iteration}}</td>
               <td>{{$item->SuratGenerate}}</td>
-              <td>{{$item->NomorSurat}}</td>
+              {{-- <td>{{$item->NomorSurat}}</td> --}}
               <td>{{$item->SuratTanggal}}</td>
               <td>
                 @if ($item->SuratSifat == 1)
