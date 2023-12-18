@@ -8,7 +8,7 @@
                 <div class="col-lg-6 d-flex align-items-center justify-content-center">
                     <div class="auth-form-transparent text-left p-3">
                         <div class="brand-logo">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg-xUT9Qdlq9Wo8vAi_K0GnJ_CawBU3Lqg6g&usqp=CAU" alt="logo">
+                            <img src={{asset("img/logo.png")}} alt="logo">
                         </div>
                         <h4>Selamat Datang!</h4>
                         <h6 class="font-weight-light">Kereta Api Indonesia Surabaya</h6>
@@ -24,7 +24,7 @@
                                     </div>
                                     <input type="text" class="form-control form-control-lg border-left-0" id="exampleInputEmail" placeholder="Email" name="email">
                                 </div>
-                            </div>
+                            </div>                                                                                           
                             @if ($errors->has('email'))
                                 <div class="alert alert-danger" role="alert">
                                     {{ $errors->first('email') }}

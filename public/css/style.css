@@ -20413,12 +20413,10 @@ dl li {
   }
 }
 
-.auth .brand-logo {
-  margin-bottom: 2rem;
-}
-
-.auth .brand-logo img {
+.auth .brand-logo img 
+{
   width: 150px;
+  height: 200px;
 }
 
 .auth form .form-group {

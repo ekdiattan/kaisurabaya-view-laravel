@@ -18,6 +18,13 @@ class RoleController extends Controller
     public function store(Request $request)
     {
     try{
+
+        $exit = Role::where('name', $request->name)->first();
+
+        if($exit)
+        {
+            
+        }
         Role::create($request->all());
 
 

@@ -15,6 +15,11 @@
             <label for="exampleInputEmail3">Kode Jabatan</label>
             <input type="text" class="form-control" id="exampleInputEmail3" placeholder="ex : DU" name="RoleCode" required>
           </div>
+          @if ($errors->has('email'))
+            <div class="alert alert-danger" role="alert">
+              
+            </div>
+          @endif
           <button type="submit" class="btn btn-primary mr-2">Submit</button>
         </form>
       </div>
