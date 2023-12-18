@@ -79,9 +79,9 @@
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
-          <div class="navbar-brand-wrapper">
+          {{-- <div class="navbar-brand-wrapper">
             <a class="navbar-brand brand-logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg-xUT9Qdlq9Wo8vAi_K0GnJ_CawBU3Lqg6g&usqp=CAU" alt="logo" id="logokai"/></a>
-          </div>
+          </div> --}}
           <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1" id="tulisan">{{$greetings}} , {{$user->user->UserName}}</h4>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">

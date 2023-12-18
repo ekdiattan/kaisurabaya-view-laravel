@@ -52,7 +52,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-lg-6 login-half-bg d-none d-lg-flex flex-row">
+                    <div class="col-lg-6 login-half-bg d-none d-lg-flex flex-row">
                 </div>
             </div>
         </div>
